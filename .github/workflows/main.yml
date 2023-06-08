@@ -1,0 +1,34 @@
+name: Run Shell Scripts
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run_scripts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Set up shell
+        run: |
+          chmod +x Build.sh
+          chmod +x Test.sh
+          chmod +x Deploy.sh
+
+      - name: Run Build.sh
+        run: ./Build.sh
+
+      - name: Run Test.sh
+        run: ./Test.sh
+
+      - name: Run Deploy.sh
+        run: ./Deploy.sh
